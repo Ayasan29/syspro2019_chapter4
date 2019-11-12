@@ -7,19 +7,19 @@ servo = GPIO.PWM(2, 50)
 servo.start(0.0)
 
 bottom = 2.5
-middle = 7.2
-top = 12.0
+
+def setservo(angle):
+	pwm = (0.5 + 1.9 * (angle / 180)) / 20 * 100
+	servo.ChangeDutyCycle(pwm)
+	time.sleep(1.0)
+
+print("enter the angle(-90 ~ 90)")
+angle = input()
+
 
 for i in range(5):
 	servo.ChangeDutyCycle(bottom)
 	time.sleep(1.0)
+	setservo(angle)
 
-	servo.ChangeDutyCycle(middle)
-	time.sleep(1.0)
-
-	servo.ChangeDutyCycle(top)
-	time.sleep(1.0)
-
-
-
-
+GPIO.cleanup()
